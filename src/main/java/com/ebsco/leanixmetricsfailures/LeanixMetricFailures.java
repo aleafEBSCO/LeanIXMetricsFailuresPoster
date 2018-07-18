@@ -62,8 +62,8 @@ public class LeanixMetricFailures
     	//in the Admin panel
     	point.setWorkspaceId(this.workspaceID);
 
-    	//the field will hold the key value pair. The key is the factsheet type and the value is the
-    	//number of incomplete factsheets
+    	//the field will hold the key value pair. The key is the failure type and the value is the
+    	//number of failures
     	Field tempField = new Field();
     	for (String key : metrics.keySet()) {
     		tempField = new Field();
@@ -145,10 +145,10 @@ public class LeanixMetricFailures
     //Main function
     public static void main (String[] args) {
     	
-    	String apiToken = "yN8YUMbq2hmJLA9fBeWnqWxGt3JCsv9DT42uxLhf";
+    	String apiToken = "";
     	String workspaceID = "f8897aa0-9602-4217-8d78-714ac1ea7e7d";
     	
-    	//create a new LeanixMetricsObject
+    	//create a new LeanixMetrics Object
     	LeanixMetricFailures lm = new LeanixMetricFailures(apiToken, workspaceID);
     	
     	//the process can take a few seconds so let the user know it's starting
@@ -183,7 +183,7 @@ public class LeanixMetricFailures
     	metrics.put("functionalFit", ft.getFunctionalFitSize());
     	metrics.put("technicalFit", ft.getTechnicalFitSize());
     	metrics.put("qualitySeal", ft.getQualitySealSize());
-    	metrics.put("ModelStatus", ft.getModelStatusSize());
+    	metrics.put("modelStatus", ft.getModelStatusSize());
     	metrics.put("score", ft.getScoreSize());
     	metrics.put("documents", ft.getDocumentsSize());
     	metrics.put("lifecycle", ft.getLifecycleSize());
@@ -192,8 +192,8 @@ public class LeanixMetricFailures
     	System.out.println(metrics.toString());
 
     	
-    	//push the number of incomplete factsheets to leanix
-    	//lm.pushPoint(metrics);
+    	//push the number of failures
+    	lm.pushPoint(metrics);
     }
     
 }
