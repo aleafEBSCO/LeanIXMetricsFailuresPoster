@@ -146,7 +146,7 @@ public class LeanixMetricFailures
     public static void main (String[] args) {
     	
     	String apiToken = "";
-    	String workspaceID = "f8897aa0-9602-4217-8d78-714ac1ea7e7d";
+    	String workspaceID = "";
     	
     	//create a new LeanixMetrics Object
     	LeanixMetricFailures lm = new LeanixMetricFailures(apiToken, workspaceID);
