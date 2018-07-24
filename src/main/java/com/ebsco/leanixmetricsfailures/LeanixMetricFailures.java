@@ -130,11 +130,18 @@ public class LeanixMetricFailures
         	//send the api client and type of factsheet to query to get a map of factsheet information
     		Map<String, Map<String, Object>> data = query.getInfo(apiClient, "/" + types[i] + ".graphql");
     		//get the list of edges from the map
-    		List<Map<String, Object>> edgeList = (List<Map<String, Object>>) data.get("allFactSheets").get("edges");
+    		try {
+    			List<Map<String, Object>> edgeList = (List<Map<String, Object>>) data.get("allFactSheets").get("edges");
     		
-    		ft.setCurrentList(edgeList);
-    		ft.setType(types[i]);
-    		ft.filterData();
+    			ft.setCurrentList(edgeList);
+    			ft.setType(types[i]);
+    			ft.filterData();
+    		}
+    		catch(NullPointerException e) {
+    			System.out.println("Query returned null most likely because the API token is incorretct/expired");
+    			e.printStackTrace();
+    			return null;
+    		}
     		
     	}
 
@@ -172,12 +179,16 @@ public class LeanixMetricFailures
     	
     	FilterTools ft = lm.LoadFilterFactsheets();
     	
+    	if (ft == null) {
+    		return;
+    	}
+    	
     	System.out.println("Info Loaded");
     	
     	Map<String, Integer> metrics = new HashMap<String, Integer>();
     	metrics.put("relation", ft.getRelationSize());
     	metrics.put("accountable", ft.getAccountableSize());
-    	metrics.put("responsible", ft.getRepsonsibleSize());
+    	metrics.put("responsible", ft.getResponsibleSize());
     	metrics.put("businessCriticality", ft.getBusinessCriticalitySize());
     	metrics.put("ownerPersona", ft.getOwnerPersonaSize());
     	metrics.put("functionalFit", ft.getFunctionalFitSize());

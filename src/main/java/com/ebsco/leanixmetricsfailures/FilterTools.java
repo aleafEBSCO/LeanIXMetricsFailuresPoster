@@ -129,7 +129,7 @@ public class FilterTools {
 		return this.accountable.size();
 	}
 
-	public int getRepsonsibleSize() {
+	public int getResponsibleSize() {
 		return this.responsible.size();
 	}
 
@@ -173,6 +173,10 @@ public class FilterTools {
 		return this.businessValueRisk.size();
 	}
 	
+	//get size of current list size
+	public int getCurrentSize() {
+		return this.currentList.size();
+	}
 	
 	//method to figure out which type of filters should be applied to the given type
 	public void filterData() {
@@ -278,7 +282,7 @@ public class FilterTools {
 	}
 	
 	//keeps factsheets that don't have children
-	private List<Map<String, Object>> keepLeafNodes(List<Map<String, Object>> info) {
+	public List<Map<String, Object>> keepLeafNodes(List<Map<String, Object>> info) {
 		//Iterator to go through factsheets (fs)
 		Iterator<Map<String, Object>> it = info.iterator();
 		while (it.hasNext()) {
@@ -299,7 +303,7 @@ public class FilterTools {
 	}
 	
 	//count fs that don't have the given relation
-	private void filterRelation(String relation) {
+	public void filterRelation(String relation) {
 		//var to key to find relation
 		String searchKey;
 		//iterate through fs
@@ -321,7 +325,7 @@ public class FilterTools {
 	}
 	
 	//counts fs that don't have accountable
-	private void filterAccount() {
+	public void filterAccount() {
 		//iterate through fs
 		Iterator<Map<String, Object>> it = this.currentList.iterator();
 		while (it.hasNext()) {
@@ -359,7 +363,7 @@ public class FilterTools {
 	}
 	
 	//counts fs that don't have responsible
-	private void filterResponse() {
+	public void filterResponse() {
 		//iterate through fs
 		Iterator<Map<String, Object>> it = this.currentList.iterator();
 		while (it.hasNext()) {
@@ -396,7 +400,7 @@ public class FilterTools {
 	}
 
 	//counts fs that aren't connected to a bounded context or behavior
-	private void filterBoundedContextAndBehavior() {
+	public void filterBoundedContextAndBehavior() {
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.currentList.iterator();
 		while (it.hasNext()) {
@@ -418,7 +422,7 @@ public class FilterTools {
 	}
 	
 	//count fs with no Business Criticality or no description
-	private void filterBusinessCriticality() {
+	public void filterBusinessCriticality() {
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.currentList.iterator();
 		while (it.hasNext()) {
@@ -435,7 +439,7 @@ public class FilterTools {
 	}
 
 	//counts fs with no owner persona when EIS is the provider
-	private void filterEisProviderOwnerPersona() {
+	public void filterEisProviderOwnerPersona() {
 		//iterate through the edges
 		Iterator<Map<String, Object>> it = this.currentList.iterator();
 		while(it.hasNext()) {
@@ -500,7 +504,7 @@ public class FilterTools {
 	}
 	
 	//count fs that don't have a functional fit or description
-	private void filterFunctionalFit() {
+	public void filterFunctionalFit() {
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.currentList.iterator();
 		while (it.hasNext()) {
@@ -517,7 +521,7 @@ public class FilterTools {
 	}
 	
 	//count fs that don't have a techincal fit or description
-	private void filterTechnicalFit() {
+	public void filterTechnicalFit() {
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.currentList.iterator();
 		while (it.hasNext()) {
@@ -534,7 +538,7 @@ public class FilterTools {
 	}
 
 	//count fs that have a broken quality seal
-	private void filterQualitySeal() {
+	public void filterQualitySeal() {
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.currentList.iterator();
 		while (it.hasNext()) {
@@ -550,7 +554,7 @@ public class FilterTools {
 	}
 	
 	//count fs that don't have a model status or have one that isn't ready
-	private void filterModelStatus() {
+	public void filterModelStatus() {
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.currentList.iterator();
 		while (it.hasNext()) {
@@ -588,7 +592,7 @@ public class FilterTools {
 	}
 	
 	//counts fs that have no owner persona
-	private void filterOwnerPersona() {
+	public void filterOwnerPersona() {
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.currentList.iterator();
 		while (it.hasNext()) {
@@ -626,7 +630,7 @@ public class FilterTools {
 	}
 
 	//counts fs with a score lower than the given double
-	private void filterScore(double percent) {
+	public void filterScore(double percent) {
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.currentList.iterator();
 		while (it.hasNext()) {
@@ -644,7 +648,7 @@ public class FilterTools {
 	}
 
 	//counts fs with no provided behaviors
-	private void filterProvidedBehaviorRelation() {
+	public void filterProvidedBehaviorRelation() {
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.currentList.iterator();
 		while (it.hasNext()) {
@@ -664,7 +668,7 @@ public class FilterTools {
 	}
 	
 	//count fs with no document links
-	private void filterDocuments() {
+	public void filterDocuments() {
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.currentList.iterator();
 		while (it.hasNext()) {
@@ -682,7 +686,7 @@ public class FilterTools {
 	}
 	
 	//counts fs with no lifecycle
-	private void filterLifecycle() {
+	public void filterLifecycle() {
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.currentList.iterator();
 		while (it.hasNext()) {
@@ -709,7 +713,7 @@ public class FilterTools {
 	}
 	
 	//counts fs with no IT component of type software
-	private void filterSoftwareITRelation() {
+	public void filterSoftwareITRelation() {
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.currentList.iterator();
 		while (it.hasNext()) {
@@ -751,7 +755,7 @@ public class FilterTools {
 	}
 
 	//counts fs with no business value or risk
-	private void filterBusinessValueRisk() {
+	public void filterBusinessValueRisk() {
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.currentList.iterator();
 		while (it.hasNext()) {
