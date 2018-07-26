@@ -154,7 +154,7 @@ class LeanixMetricFailures {
 
     //the field will hold the key value pair. The key is the failure type and the value is the
     //number of failures
-    Field tempField = new Field();
+    Field tempField;
     for (String key : metrics.keySet()) {
       tempField = new Field();
       //set key to factsheet type
