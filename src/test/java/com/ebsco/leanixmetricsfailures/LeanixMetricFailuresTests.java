@@ -18,7 +18,7 @@ public class LeanixMetricFailuresTests {
 	@Test
 	public void loadFilterFactsheetsTest() {
 		//create the object
-		LeanixMetricFailures lm = new LeanixMetricFailures(apiToken, workspaceID);
+		LeanixMetricFailures lm = new LeanixMetricFailures(apiToken, workspaceID, "randomName");
 		FilterTools ft = lm.LoadFilterFactsheets();
 		
 		//make sure that there are sizes for the types of failures
@@ -42,7 +42,7 @@ public class LeanixMetricFailuresTests {
 	@Test
 	public void brokenKeyGetTest() {
 		//object with fake key
-		LeanixMetricFailures lm = new LeanixMetricFailures("1234", workspaceID);
+		LeanixMetricFailures lm = new LeanixMetricFailures("1234", workspaceID, "randomName");
 		
 		//try to load factsheets
 		FilterTools ft = lm.LoadFilterFactsheets();
@@ -72,7 +72,7 @@ public class LeanixMetricFailuresTests {
     	metrics.put("businessValueRisk", 13);
     	
     	//create object with fake key
-    	LeanixMetricFailures ft = new LeanixMetricFailures("1234", workspaceID);
+    	LeanixMetricFailures ft = new LeanixMetricFailures("1234", workspaceID, "randomName");
     	
     	ft.pushPoint(metrics);
     	

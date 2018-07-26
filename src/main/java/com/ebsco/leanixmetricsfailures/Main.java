@@ -7,11 +7,12 @@ public class Main {
 	//Main function
     public static void main (String[] args) {
     	
-    	String apiToken = "";
-    	String workspaceID = "";
+    	String apiToken = args[0];
+    	String workspaceID = args[1];
+    	String measurementsName = args[2];
     	
     	//create a new LeanixMetrics Object
-    	LeanixMetricFailures lm = new LeanixMetricFailures(apiToken, workspaceID);
+    	LeanixMetricFailures lm = new LeanixMetricFailures(apiToken, workspaceID, measurementsName);
     	
     	//the process can take a few seconds so let the user know it's starting
     	System.out.println("Starting...");

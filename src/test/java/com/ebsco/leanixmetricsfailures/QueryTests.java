@@ -31,7 +31,7 @@ public class QueryTests {
 		
 		for (int i = 0; i < types.length; i++) {
 		
-			LeanixMetricFailures lm = new LeanixMetricFailures(apiToken, workspaceID);
+			LeanixMetricFailures lm = new LeanixMetricFailures(apiToken, workspaceID, "randomName");
 			net.leanix.api.common.ApiClient apiClient = lm.QueryClient();
 			
 			Query q = new Query();
@@ -70,7 +70,7 @@ public class QueryTests {
 	@Test
 	public void MissingFileTest() {
 		
-		LeanixMetricFailures lm = new LeanixMetricFailures(apiToken, workspaceID);
+		LeanixMetricFailures lm = new LeanixMetricFailures(apiToken, workspaceID, "randomName");
 		net.leanix.api.common.ApiClient apiClient = lm.QueryClient();
 		
 		Query q = new Query();
