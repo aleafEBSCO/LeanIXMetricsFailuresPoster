@@ -4,3 +4,8 @@ target/
 .project
 secrets.txt
 ExpectedNums.txt
+.idea
+*.iml
+out/
+META-INF/
+TestsArguments.txt

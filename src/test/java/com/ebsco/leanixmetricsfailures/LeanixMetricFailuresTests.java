@@ -1,5 +1,9 @@
 package com.ebsco.leanixmetricsfailures;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,13 +11,37 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 class LeanixMetricFailuresTests {
+	private String apiToken = "";
 	private String workspaceID = "";
-	
+
+	LeanixMetricFailuresTests() {
+		//file input stream
+		InputStream in = getClass().getResourceAsStream("/TestsArguments.txt");
+		//try to read the file
+		try {
+			//reader for the input stream
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+			//add each line to the string builder
+			this.apiToken = reader.readLine();
+			this.workspaceID = reader.readLine();
+			//close the file
+			reader.close();
+		}
+		//else the file can't be read or found
+		catch(NullPointerException e) {
+			System.out.println("Unable to open file 'TestsArguments.txt'");
+			e.printStackTrace();
+		}
+		catch(IOException e) {
+			System.out.println("Error reading file 'TestsArguments.txt'");
+			e.printStackTrace();
+		}
+	}
+
 	//check to make sure a filtertools is returned from LoadFilterFactsheets
 	@Test
 	void loadFilterFactsheetsTest() {
 		//create the object
-		String apiToken = "";
 		LeanixMetricFailures lm = new LeanixMetricFailures(apiToken, workspaceID, "randomName");
 		FilterTools ft = lm.LoadFilterFactsheets();
 		
