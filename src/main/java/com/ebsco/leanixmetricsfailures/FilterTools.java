@@ -35,7 +35,7 @@ public class FilterTools {
 	private Map<String, String> ebscoToLeanix;
 	
 	//default constructor
-	public FilterTools() {
+	FilterTools() {
 		//save the leafnodes from the list of nodes
 		this.currentList = new ArrayList<Map<String, Object>>();
 		//save the type
@@ -72,7 +72,7 @@ public class FilterTools {
 	}
 	
 	//constructor
-	public FilterTools(List<Map<String, Object>> info, String t) {
+	FilterTools(List<Map<String, Object>> info, String t) {
 		//save the leafnodes from the list of nodes
 		this.currentList = keepLeafNodes(info);
 		//save the type
@@ -109,7 +109,7 @@ public class FilterTools {
 	}
 	
 	//set current data
-	public void setCurrentList(List<Map<String, Object>> cd) {
+	void setCurrentList(List<Map<String, Object>> cd) {
 		this.currentList = keepLeafNodes(cd);
 	}
 	
@@ -121,69 +121,69 @@ public class FilterTools {
 	//get size methods for sets
 	//initiallize sets to hold factsheets that fail certain tests
 	
-	public int getRelationSize() {
+	int getRelationSize() {
 		return this.relation.size();
 	}
 	
-	public int getAccountableSize() {
+	int getAccountableSize() {
 		return this.accountable.size();
 	}
 
-	public int getResponsibleSize() {
+	int getResponsibleSize() {
 		return this.responsible.size();
 	}
 
-	public int getBusinessCriticalitySize() {
+	int getBusinessCriticalitySize() {
 		return this.businessCriticality.size();
 	}
 
-	public int getOwnerPersonaSize() {
+	int getOwnerPersonaSize() {
 		return this.ownerPersona.size();
 	}
 	
-	public int getFunctionalFitSize() {
+	int getFunctionalFitSize() {
 		return this.functionalFit.size();
 	}
 
-	public int getTechnicalFitSize() {
+	int getTechnicalFitSize() {
 		return this.technicalFit.size();
 	}
 
-	public int getQualitySealSize() {
+	int getQualitySealSize() {
 		return this.qualitySeal.size();
 	}
 
-	public int getModelStatusSize() {
+	int getModelStatusSize() {
 		return this.modelStatus.size();
 	}
 
-	public int getScoreSize() {
+	int getScoreSize() {
 		return this.score.size();
 	}
 	
-	public int getDocumentsSize() {
+	int getDocumentsSize() {
 		return this.documents.size();
 	}
 	
-	public int getLifecycleSize() {
+	int getLifecycleSize() {
 		return this.lifecycle.size();
 	}
 	
-	public int getBusinessValueRiskSize() {
+	int getBusinessValueRiskSize() {
 		return this.businessValueRisk.size();
 	}
 	
 	//get size of current list size
-	public int getCurrentSize() {
+	int getCurrentSize() {
 		return this.currentList.size();
 	}
 	
 	//method to figure out which type of filters should be applied to the given type
-	public void filterData() {
+	void filterData() {
 		//let the user know filtering has begun
 		System.out.println(type + " filtering");
 		//Bounded Context/Application filtering
-		if (this.type.equals("boundedContext")) {
+		if ("boundedContext".equals(this.type)) {
 			filterLifecycle();
 			filterBusinessCriticality();
 			filterFunctionalFit();
@@ -202,7 +202,7 @@ public class FilterTools {
 			filterScore(.7);
 		}
 		//domain/BusinessCapability filtering
-		else if (this.type.equals("domain")) {
+		else if ("domain".equals(this.type)) {
 			filterRelation("Bounded Context");
 			filterRelation("Use Case");
 			filterAccount();
@@ -212,7 +212,7 @@ public class FilterTools {
 			filterScore(.6);
 		}
 		//Data Object filtering
-		else if (this.type.equals("dataObject")) {
+		else if ("dataObject".equals(this.type)) {
 			filterBoundedContextAndBehavior();
 			filterAccount();
 			filterResponse();
@@ -221,7 +221,7 @@ public class FilterTools {
 			filterScore(.5);
 		}
 		//IT Component filtering
-		else if (this.type.equals("ITComponent")) {
+		else if ("ITComponent".equals(this.type)) {
 			filterRelation("Provider");
 			filterDocuments();
 			filterLifecycle();
@@ -233,10 +233,10 @@ public class FilterTools {
 			filterResponse();
 			filterQualitySeal();
 			filterModelStatus();
-			filterScore(.7);	
+			filterScore(.7);
 		}
 		//Behavior/Interface filtering
-		else if (this.type.equals("behavior")) {
+		else if ("behavior".equals(this.type)) {
 			filterRelation("Provider Application");
 			filterRelation("IT Component");
 			filterAccount();
@@ -246,7 +246,7 @@ public class FilterTools {
 			filterScore(.6);
 		}
 		//Use Case/Process filtering
-		else if (this.type.equals("useCase")) {
+		else if ("useCase".equals(this.type)) {
 			filterRelation("Domain");
 			filterDocuments();
 			filterLifecycle();
@@ -258,7 +258,7 @@ public class FilterTools {
 			filterScore(.60);
 		}
 		//Epic/Project filtering
-		else if (this.type.equals("epic")) {
+		else if ("epic".equals(this.type)) {
 			filterDocuments();
 			filterLifecycle();
 			filterBusinessValueRisk();
@@ -271,18 +271,19 @@ public class FilterTools {
 			filterScore(.5);
 		}
 		//Persona/userGroup filtering
-		else if (this.type.equals("persona")) {
+		else if ("persona".equals(this.type)) {
 			filterAccount();
 			filterResponse();
 			filterQualitySeal();
 			filterModelStatus();
 			filterScore(.5);
+
 		}
 		
 	}
 	
 	//keeps factsheets that don't have children
-	public List<Map<String, Object>> keepLeafNodes(List<Map<String, Object>> info) {
+	private List<Map<String, Object>> keepLeafNodes(List<Map<String, Object>> info) {
 		//Iterator to go through factsheets (fs)
 		Iterator<Map<String, Object>> it = info.iterator();
 		while (it.hasNext()) {
@@ -303,14 +304,12 @@ public class FilterTools {
 	}
 	
 	//count fs that don't have the given relation
-	public void filterRelation(String relation) {
+	void filterRelation(String relation) {
 		//var to key to find relation
 		String searchKey;
 		//iterate through fs
-		Iterator<Map<String, Object>> it = this.currentList.iterator();
-		while (it.hasNext()) {
+		for (Map<String, Object> edge : this.currentList) {
 			//get the node in each edge
-			Map<String, Object> edge = it.next();
 			Map<String, Object> node = (Map<String, Object>) edge.get("node");
 			//create the search key using the current type and given relation
 			searchKey = "rel" + node.get("type").toString() + "To" + this.ebscoToLeanix.get(relation);
@@ -325,35 +324,31 @@ public class FilterTools {
 	}
 	
 	//counts fs that don't have accountable
-	public void filterAccount() {
+	void filterAccount() {
 		//iterate through fs
-		Iterator<Map<String, Object>> it = this.currentList.iterator();
-		while (it.hasNext()) {
+		for (Map<String, Object> aCurrentList : this.currentList) {
 			//bools to see if there's someone responsible and accountable
 			boolean accountFound = false;
-			
+
 			//get the node from each edge
-			Map<String, Object> edge = it.next();
-			Map<String, Object> node = (Map<String, Object>) edge.get("node");
-			
+			Map<String, Object> node = (Map<String, Object>) aCurrentList.get("node");
+
 			//get the subscriptions for the fs
 			Map<String, Object> subscriptions = (Map<String, Object>) node.get("subscriptions");
-			
+
 			//go through subscriptions
 			List<Map<String, Object>> subEdges = (List<Map<String, Object>>) subscriptions.get("edges");
-			Iterator<Map<String, Object>> it2 = subEdges.iterator();
-			while (it2.hasNext()) {
+			for (Map<String, Object> innerEdge : subEdges) {
 				//get the node for each subscription
-				Map<String, Object> innerEdge = it2.next();
 				Map<String, Object> innerNode = (Map<String, Object>) innerEdge.get("node");
-				
+
 				//see if the subsrictption is Accountable and save the info as a bool
 
 				if (innerNode.get("type").toString().equals("ACCOUNTABLE")) {
 					accountFound = true;
 				}
 			}
-			
+
 			//if there isn't both someone responsible and accountable
 			if (!(accountFound)) {
 				//add it to the set
@@ -363,34 +358,30 @@ public class FilterTools {
 	}
 	
 	//counts fs that don't have responsible
-	public void filterResponse() {
+	void filterResponse() {
 		//iterate through fs
-		Iterator<Map<String, Object>> it = this.currentList.iterator();
-		while (it.hasNext()) {
+		for (Map<String, Object> aCurrentList : this.currentList) {
 			//bools to see if there's someone responsible and accountable
 			boolean responseFound = false;
-			
+
 			//get the node from each edge
-			Map<String, Object> edge = it.next();
-			Map<String, Object> node = (Map<String, Object>) edge.get("node");
-			
+			Map<String, Object> node = (Map<String, Object>) aCurrentList.get("node");
+
 			//get the subscriptions for the fs
 			Map<String, Object> subscriptions = (Map<String, Object>) node.get("subscriptions");
-			
+
 			//go through subscriptions
 			List<Map<String, Object>> subEdges = (List<Map<String, Object>>) subscriptions.get("edges");
-			Iterator<Map<String, Object>> it2 = subEdges.iterator();
-			while (it2.hasNext()) {
+			for (Map<String, Object> innerEdge : subEdges) {
 				//get the node for each subscription
-				Map<String, Object> innerEdge = it2.next();
 				Map<String, Object> innerNode = (Map<String, Object>) innerEdge.get("node");
-				
+
 				//see if the subsrciption is Responsible, save the info as a bool
 				if (innerNode.get("type").toString().equals("RESPONSIBLE")) {
 					responseFound = true;
 				}
 			}
-			
+
 			//if there isn't both someone responsible and accountable
 			if (!(responseFound)) {
 				//add it to the set
@@ -400,12 +391,10 @@ public class FilterTools {
 	}
 
 	//counts fs that aren't connected to a bounded context or behavior
-	public void filterBoundedContextAndBehavior() {
+	void filterBoundedContextAndBehavior() {
 		//iterate through edges
-		Iterator<Map<String, Object>> it = this.currentList.iterator();
-		while (it.hasNext()) {
+		for (Map<String, Object> edge : this.currentList) {
 			//get node from each edge
-			Map<String, Object> edge = it.next();
 			Map<String, Object> node = (Map<String, Object>) edge.get("node");
 			//get keys to use to get connection information
 			String contextKey = "rel" + node.get("type").toString() + "ToApplication";
@@ -422,16 +411,14 @@ public class FilterTools {
 	}
 	
 	//count fs with no Business Criticality or no description
-	public void filterBusinessCriticality() {
+	void filterBusinessCriticality() {
 		//iterate through edges
-		Iterator<Map<String, Object>> it = this.currentList.iterator();
-		while (it.hasNext()) {
+		for (Map<String, Object> edge : this.currentList) {
 			//get node from each edge
-			Map<String, Object> edge = it.next();
 			Map<String, Object> node = (Map<String, Object>) edge.get("node");
 			//if business criticalitty is null or description is null/blank
 			if ((node.get("businessCriticality") == null) || (node.get("businessCriticalityDescription") == null)
-					|| (node.get("businessCriticalityDescription").toString().equals(""))) {
+							|| (node.get("businessCriticalityDescription").toString().equals(""))) {
 				//add fs to set
 				this.businessCriticality.add(node.get("id").toString());
 			}
@@ -439,15 +426,13 @@ public class FilterTools {
 	}
 
 	//counts fs with no owner persona when EIS is the provider
-	public void filterEisProviderOwnerPersona() {
+	void filterEisProviderOwnerPersona() {
 		//iterate through the edges
-		Iterator<Map<String, Object>> it = this.currentList.iterator();
-		while(it.hasNext()) {
+		for (Map<String, Object> edge : this.currentList) {
 			//first check to see if eis is an owner
 			//get the node from the edge
-			Map<String, Object> edge = it.next();
 			Map<String, Object> node = (Map<String, Object>) edge.get("node");
-			
+
 			//bool to see hold if eis is provider
 			boolean eisProvider = false;
 			//key to find providers
@@ -457,9 +442,8 @@ public class FilterTools {
 			//get the list of provider edges
 			ArrayList<Map<String, Object>> relEdgeList = (ArrayList<Map<String, Object>>) relation.get("edges");
 			//go through provider edges
-			for (int i = 0; i < relEdgeList.size(); i++) {
+			for (Map<String, Object> innerEdge : relEdgeList) {
 				//get the node from each edges
-				Map<String, Object> innerEdge = relEdgeList.get(i);
 				Map<String, Object> innerNode = (Map<String, Object>) innerEdge.get("node");
 				//get the provider factsheet
 				Map<String, String> factsheet = (Map<String, String>) innerNode.get("factSheet");
@@ -470,7 +454,7 @@ public class FilterTools {
 					break;
 				}
 			}
-			
+
 			//bool so hold if an owner is found
 			boolean ownerFound = false;
 			//if eis is a provider
@@ -482,19 +466,18 @@ public class FilterTools {
 				//get the list of user group edges
 				ArrayList<Map<String, Object>> relEdgeList2 = (ArrayList<Map<String, Object>>) relation2.get("edges");
 				//go through the edges
-				for (int i = 0; i < relEdgeList2.size(); i++) {
+				for (Map<String, Object> innerEdge2 : relEdgeList2) {
 					//get the node from each edge
-					Map<String, Object> innerEdge2 = relEdgeList2.get(i);
 					Map<String, String> innerNode2 = (Map<String, String>) innerEdge2.get("node");
 					//if the node has a usage type and it's value is owner
-					if ((innerNode2.get("usageType") != null) 
-							&& (innerNode2.get("usageType").equals("owner"))) {
+					if ((innerNode2.get("usageType") != null)
+									&& (innerNode2.get("usageType").equals("owner"))) {
 						//then there is an owner
 						ownerFound = true;
 					}
 				}
 			}
-			
+
 			//if eis is the provider and there's no owner
 			if ((eisProvider && !(ownerFound))) {
 				//add to set
@@ -504,16 +487,14 @@ public class FilterTools {
 	}
 	
 	//count fs that don't have a functional fit or description
-	public void filterFunctionalFit() {
+	void filterFunctionalFit() {
 		//iterate through edges
-		Iterator<Map<String, Object>> it = this.currentList.iterator();
-		while (it.hasNext()) {
+		for (Map<String, Object> edge : this.currentList) {
 			//get node from each edge
-			Map<String, Object> edge = it.next();
 			Map<String, Object> node = (Map<String, Object>) edge.get("node");
 			//if there's no functionSuitability or description doesn't exist/is empty 
 			if ((node.get("functionalSuitability") == null) || (node.get("functionalSuitabilityDescription") == null)
-					|| (node.get("functionalSuitabilityDescription").toString().equals(""))) {
+							|| (node.get("functionalSuitabilityDescription").toString().equals(""))) {
 				//add fs to set
 				this.functionalFit.add(node.get("id").toString());
 			}
@@ -521,16 +502,14 @@ public class FilterTools {
 	}
 	
 	//count fs that don't have a techincal fit or description
-	public void filterTechnicalFit() {
+	void filterTechnicalFit() {
 		//iterate through edges
-		Iterator<Map<String, Object>> it = this.currentList.iterator();
-		while (it.hasNext()) {
+		for (Map<String, Object> edge : this.currentList) {
 			//get node from each edge
-			Map<String, Object> edge = it.next();
 			Map<String, Object> node = (Map<String, Object>) edge.get("node");
 			//if there's no technical suitability or no/blank description 
 			if ((node.get("technicalSuitability") == null) || (node.get("technicalSuitabilityDescription") == null)
-					|| (node.get("technicalSuitabilityDescription").toString().equals(""))) {
+							|| (node.get("technicalSuitabilityDescription").toString().equals(""))) {
 				//add fs to set
 				this.technicalFit.add(node.get("id").toString());
 			}
@@ -538,12 +517,10 @@ public class FilterTools {
 	}
 
 	//count fs that have a broken quality seal
-	public void filterQualitySeal() {
+	void filterQualitySeal() {
 		//iterate through edges
-		Iterator<Map<String, Object>> it = this.currentList.iterator();
-		while (it.hasNext()) {
+		for (Map<String, Object> edge : this.currentList) {
 			//get node from edge
-			Map<String, Object> edge = it.next();
 			Map<String, Object> node = (Map<String, Object>) edge.get("node");
 			//if quality seal is broken
 			if (node.get("qualitySeal").toString().equals("BROKEN")) {
@@ -554,21 +531,18 @@ public class FilterTools {
 	}
 	
 	//count fs that don't have a model status or have one that isn't ready
-	public void filterModelStatus() {
+	void filterModelStatus() {
 		//iterate through edges
-		Iterator<Map<String, Object>> it = this.currentList.iterator();
-		while (it.hasNext()) {
+		for (Map<String, Object> edge : this.currentList) {
 			//get node from each edge
-			Map<String, Object> edge = it.next();
 			Map<String, Object> node = (Map<String, Object>) edge.get("node");
 			//get list of tags from node
 			ArrayList<Map<String, Object>> tags = (ArrayList<Map<String, Object>>) node.get("tags");
 			//bool to hold if the tag is found
 			boolean tagFound = false;
 			//go through tags
-			for (int i = 0; i < tags.size(); i++) {
+			for (Map<String, Object> currentTag : tags) {
 				//get the current tag
-				Map<String, Object> currentTag = tags.get(i);
 				//get the group that the tag belongs tp
 				Map<String, Object> currentTagGroup = (Map<String, Object>) currentTag.get("tagGroup");
 				//if the tag group is state of model completeness
@@ -592,14 +566,12 @@ public class FilterTools {
 	}
 	
 	//counts fs that have no owner persona
-	public void filterOwnerPersona() {
+	void filterOwnerPersona() {
 		//iterate through edges
-		Iterator<Map<String, Object>> it = this.currentList.iterator();
-		while (it.hasNext()) {
+		for (Map<String, Object> edge : this.currentList) {
 			//get node from each edge
-			Map<String, Object> edge = it.next();
 			Map<String, Object> node = (Map<String, Object>) edge.get("node");
-			
+
 			//var to hold number of owners
 			int numOwners = 0;
 			//search key to get user group list
@@ -609,18 +581,18 @@ public class FilterTools {
 			//get list of user group relations from object
 			ArrayList innerEdges = relation.get("edges");
 			//go through edges
-			for (int i = 0; i < innerEdges.size(); i++) {
+			for (Object innerEdge : innerEdges) {
 				//get node of each edge
-				Map<String, Object> currentInnerEdge = (Map<String, Object>) innerEdges.get(i);
+				Map<String, Object> currentInnerEdge = (Map<String, Object>) innerEdge;
 				Map<String, Object> currentInnerNode = (Map<String, Object>) currentInnerEdge.get("node");
 				//if there's a usage type and the type is owner
-				if ((currentInnerNode.get("usageType") != null) 
-						&& currentInnerNode.get("usageType").toString().equals("owner")) {
+				if ((currentInnerNode.get("usageType") != null)
+								&& currentInnerNode.get("usageType").toString().equals("owner")) {
 					//increment the number of owners
 					numOwners++;
 				}
 			}
-			
+
 			//if there's no owner
 			if (numOwners == 0) {
 				//add node to set
@@ -630,12 +602,10 @@ public class FilterTools {
 	}
 
 	//counts fs with a score lower than the given double
-	public void filterScore(double percent) {
+	void filterScore(double percent) {
 		//iterate through edges
-		Iterator<Map<String, Object>> it = this.currentList.iterator();
-		while (it.hasNext()) {
+		for (Map<String, Object> edge : this.currentList) {
 			//get node from each edge
-			Map<String, Object> edge = it.next();
 			Map<String, Object> node = (Map<String, Object>) edge.get("node");
 			//get the completion object from each node
 			Map<String, Double> innerNode = (Map<String, Double>) node.get("completion");
@@ -648,12 +618,10 @@ public class FilterTools {
 	}
 
 	//counts fs with no provided behaviors
-	public void filterProvidedBehaviorRelation() {
+	void filterProvidedBehaviorRelation() {
 		//iterate through edges
-		Iterator<Map<String, Object>> it = this.currentList.iterator();
-		while (it.hasNext()) {
+		for (Map<String, Object> edge : this.currentList) {
 			//get node from each edge
-			Map<String, Object> edge = it.next();
 			Map<String, Object> node = (Map<String, Object>) edge.get("node");
 			//key to get relations
 			String searchKey = "relProvider" + node.get("type").toString() + "ToInterface";
@@ -668,12 +636,10 @@ public class FilterTools {
 	}
 	
 	//count fs with no document links
-	public void filterDocuments() {
+	void filterDocuments() {
 		//iterate through edges
-		Iterator<Map<String, Object>> it = this.currentList.iterator();
-		while (it.hasNext()) {
+		for (Map<String, Object> edge : this.currentList) {
 			//get node from each edge
-			Map<String, Object> edge = it.next();
 			Map<String, Object> node = (Map<String, Object>) edge.get("node");
 			//get documents object
 			Map<String, Integer> innerNode = (Map<String, Integer>) node.get("documents");
@@ -686,19 +652,18 @@ public class FilterTools {
 	}
 	
 	//counts fs with no lifecycle
-	public void filterLifecycle() {
+	void filterLifecycle() {
 		//iterate through edges
-		Iterator<Map<String, Object>> it = this.currentList.iterator();
-		while (it.hasNext()) {
+		for (Map<String, Object> edge : this.currentList) {
 			//get node from each edge
-			Map<String, Object> edge = it.next();
 			Map<String, Object> node = (Map<String, Object>) edge.get("node");
 			//if there's no lifecycle
 			if (node.get("lifecycle") == null) {
 				//add fs to set
 				this.lifecycle.add(node.get("id").toString());
-			//else there is a lifecycle
-			}else {
+				//else there is a lifecycle
+			}
+			else {
 				//get lifecycle object from node
 				Map<String, ArrayList> innerNode = (Map<String, ArrayList>) node.get("lifecycle");
 				//get list of phases in lifecycle
@@ -713,14 +678,12 @@ public class FilterTools {
 	}
 	
 	//counts fs with no IT component of type software
-	public void filterSoftwareITRelation() {
+	void filterSoftwareITRelation() {
 		//iterate through edges
-		Iterator<Map<String, Object>> it = this.currentList.iterator();
-		while (it.hasNext()) {
+		for (Map<String, Object> edge : this.currentList) {
 			//get node from each edge
-			Map<String, Object> edge = it.next();
 			Map<String, Object> node = (Map<String, Object>) edge.get("node");
-			
+
 			//bool to see if software type is found
 			boolean softwareFound = false;
 			//key to get relation from node
@@ -730,22 +693,21 @@ public class FilterTools {
 			//get the list of relation edges
 			ArrayList<Map<String, Object>> innerEdges = relation.get("edges");
 			//go through edges
-			for (int i = 0; i < innerEdges.size(); i++) {
+			for (Map<String, Object> currentInnerEdge : innerEdges) {
 				//get node from each edge
-				Map<String, Object> currentInnerEdge = innerEdges.get(i);
 				Map<String, Object> currentInnerNode = (Map<String, Object>) currentInnerEdge.get("node");
-				
+
 				//get the it component factsheet
 				Map<String, String> currentInnerFactsheet = (Map<String, String>) currentInnerNode.get("factSheet");
 				//if the it component has a category and it software
-				if ((currentInnerFactsheet.get("category") != null) && 
-						(currentInnerFactsheet.get("category").equals("software"))) {
+				if ((currentInnerFactsheet.get("category") != null) &&
+								(currentInnerFactsheet.get("category").equals("software"))) {
 					//there is a software it component
 					softwareFound = true;
 					break;
 				}
 			}
-			
+
 			//if there's no software it component 
 			if (!(softwareFound)) {
 				//add fs to set
@@ -755,14 +717,12 @@ public class FilterTools {
 	}
 
 	//counts fs with no business value or risk
-	public void filterBusinessValueRisk() {
+	void filterBusinessValueRisk() {
 		//iterate through edges
-		Iterator<Map<String, Object>> it = this.currentList.iterator();
-		while (it.hasNext()) {
+		for (Map<String, Object> edge : this.currentList) {
 			//get node from each edge
-			Map<String, Object> edge = it.next();
 			Map<String, Object> node = (Map<String, Object>) edge.get("node");
-			
+
 			//if there's no business value
 			if (node.get("businessValue") == null) {
 				//add fs to set

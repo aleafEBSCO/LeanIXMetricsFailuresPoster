@@ -1,23 +1,19 @@
 package com.ebsco.leanixmetricsfailures;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class LeanixMetricFailuresTests {
-	String apiToken = "";
-	String workspaceID = "";
+class LeanixMetricFailuresTests {
+	private String workspaceID = "";
 	
 	//check to make sure a filtertools is returned from LoadFilterFactsheets
 	@Test
-	public void loadFilterFactsheetsTest() {
+	void loadFilterFactsheetsTest() {
 		//create the object
+		String apiToken = "";
 		LeanixMetricFailures lm = new LeanixMetricFailures(apiToken, workspaceID, "randomName");
 		FilterTools ft = lm.LoadFilterFactsheets();
 		
@@ -40,7 +36,7 @@ public class LeanixMetricFailuresTests {
 	
 	//test to make sure that an error will be thrown when trying to get info with the wrong api key
 	@Test
-	public void brokenKeyGetTest() {
+	void brokenKeyGetTest() {
 		//object with fake key
 		LeanixMetricFailures lm = new LeanixMetricFailures("1234", workspaceID, "randomName");
 		
@@ -48,13 +44,13 @@ public class LeanixMetricFailuresTests {
 		FilterTools ft = lm.LoadFilterFactsheets();
     	
 		//it will return null
-    	assertEquals(ft, null);
+		assertNull(ft);
 		
 	}
 	
 	//test to make sure an error will be thrown when trying to post info with the wrong api key
 	@Test
-	public void brokenKeyPostTest() {
+	void brokenKeyPostTest() {
 		//fake metrics
 		Map<String, Integer> metrics = new HashMap<String, Integer>();
     	metrics.put("relation", 1);
