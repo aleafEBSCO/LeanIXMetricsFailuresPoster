@@ -12,6 +12,7 @@ import net.leanix.api.common.ApiClient;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 //Tests for Query class
 class QueryTests {
@@ -88,7 +89,7 @@ class QueryTests {
 			}
 
 			//assert that no other types appeared and at least one factsheet was returned
-			assert (onlyType && atLeastOne);
+			assertTrue(onlyType && atLeastOne);
 
 		}
 		

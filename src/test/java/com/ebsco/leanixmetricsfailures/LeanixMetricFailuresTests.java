@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LeanixMetricFailuresTests {
 	private String apiToken = "";
@@ -46,19 +47,19 @@ class LeanixMetricFailuresTests {
 		FilterTools ft = lm.LoadFilterFactsheets();
 		
 		//make sure that there are sizes for the types of failures
-		assert(ft.getAccountableSize() >= 0);
-		assert(ft.getBusinessCriticalitySize() >= 0);
-		assert(ft.getBusinessValueRiskSize() >= 0);
-		assert(ft.getDocumentsSize() >= 0);
-		assert(ft.getFunctionalFitSize() >= 0);
-		assert(ft.getLifecycleSize() >= 0);
-		assert(ft.getModelStatusSize() >= 0);
-		assert(ft.getOwnerPersonaSize() >= 0);
-		assert(ft.getQualitySealSize() >= 0);
-		assert(ft.getRelationSize() >= 0);
-		assert(ft.getResponsibleSize() >= 0);
-		assert(ft.getScoreSize() >= 0);
-		assert(ft.getTechnicalFitSize() >= 0);
+		assertTrue(ft.getAccountableSize() >= 0);
+		assertTrue(ft.getBusinessCriticalitySize() >= 0);
+		assertTrue(ft.getBusinessValueRiskSize() >= 0);
+		assertTrue(ft.getDocumentsSize() >= 0);
+		assertTrue(ft.getFunctionalFitSize() >= 0);
+		assertTrue(ft.getLifecycleSize() >= 0);
+		assertTrue(ft.getModelStatusSize() >= 0);
+		assertTrue(ft.getOwnerPersonaSize() >= 0);
+		assertTrue(ft.getQualitySealSize() >= 0);
+		assertTrue(ft.getRelationSize() >= 0);
+		assertTrue(ft.getResponsibleSize() >= 0);
+		assertTrue(ft.getScoreSize() >= 0);
+		assertTrue(ft.getTechnicalFitSize() >= 0);
 		
 	}
 	
