@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -152,13 +153,31 @@ class LeanixMetricFailures {
     //in the Admin panel
     point.setWorkspaceId(this.workspaceID);
 
+    //create a map to map variable names to normal names
+    Map<String, String> niceName = new HashMap<String, String>();
+    niceName.put("accountable", "No Accountable");
+    niceName.put("businessCriticality", "No Business Criticality or Description");
+    niceName.put("businessValueRisk", "No Business Value and Risk");
+    niceName.put("documents", "No Document Links");
+    niceName.put("functionalFit", "No Functional Fit or Description");
+    niceName.put("lifecycle", "No Lifecycle");
+    niceName.put("modelStatus", "Model Status not 'ready'");
+    niceName.put("ownerPersona", "Owner Persona Issue");
+    niceName.put("qualitySeal", "Broken Quality Seal");
+    niceName.put("relation", "Missing Relation(s)");
+    niceName.put("responsible", "No Responsible");
+    niceName.put("score", "Score below Threshold");
+    niceName.put("technicalFit", "No Technical Fit or Description");
+
+
+
     //the field will hold the key value pair. The key is the failure type and the value is the
     //number of failures
     Field tempField;
     for (String key : metrics.keySet()) {
       tempField = new Field();
       //set key to factsheet type
-      tempField.setK(key);
+      tempField.setK(niceName.get(key));
       //set value to number of incomplete factsheets
       tempField.setV(metrics.get(key).doubleValue());
       //add the field to the list
